@@ -18,9 +18,9 @@ public class LongDivisionCalculator {
         List<String> resultsStr = new ArrayList<String>(); //aggregated results
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        printNewLine("Добро пожаловать в программу 'Калькулятор деления столбиком (КДС)'");
-        a = input(a, bufferedReader, "Пожалуйста, введите числитель (a): ");
-        b = input(b, bufferedReader, "а теперь введите знаменатель (b): ");
+        printNewLine("Welcome to long devision calculator");
+        a = input(a, bufferedReader, "Please enter numerator (a): ");
+        b = input(b, bufferedReader, "Please enter de-numerator (b): ");
 
 
         printNewLine(a+" | "+b);
@@ -50,7 +50,7 @@ public class LongDivisionCalculator {
         for (String r : resultsStr) {
             System.out.print(r);
         }
-        printNewLine("\nХорошего дня! :)");
+        printNewLine("\nHave a nice day! :)");
     }
 
     private static void printNewLine(String text) {
@@ -65,7 +65,7 @@ public class LongDivisionCalculator {
                 i = Integer.parseInt(br.readLine());
                 isError = false;
             }catch(NumberFormatException nfe){
-                System.err.println("Неправильный формат числа. Введите целое");
+                System.err.println("Inappropriate number format. Please use integer");
                 isError = true;
             }
         }
