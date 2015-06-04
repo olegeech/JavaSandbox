@@ -16,7 +16,6 @@ public class LongDivisionCalculator {
         int c; //result variable
         boolean point = false;
         List<String> resultsStr = new ArrayList<String>(); //aggregated results
-        int a1 = 0; //temp var
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         printNewLine("Добро пожаловать в программу 'Калькулятор деления столбиком (КДС)'");
