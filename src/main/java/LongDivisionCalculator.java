@@ -13,7 +13,7 @@ public class LongDivisionCalculator {
     public static void main(String[] args) throws IOException {
         int a = 0; //input variable
         int b = 0; //input variable
-        int c; //result variable
+        int c = 0; //result variable
         boolean point = false;
         List<String> resultsStr = new ArrayList<String>(); //aggregated results
 
@@ -35,13 +35,15 @@ public class LongDivisionCalculator {
                 a *= 10;
                 i1++;
             }
-
-            c = (int)((double) a / b); //casted twice because of int rounding
-
-
-            resultsStr.add(String.valueOf(c));
-            a = a - (c * b); //excess calculation
             System.out.println(a);
+
+            while (a >= b) {
+                //int iSpace;
+                a -= b;
+                c++;
+            }
+            resultsStr.add(String.valueOf(c));
+            c = 0;
 
             i++;
         } while (a!=0 && i < 10);
