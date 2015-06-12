@@ -1,57 +1,83 @@
 /**
  * Created by Oleg on 21.08.2014.
  */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-/** Long devision calculator */
+/**
+ * Long devision calculator
+ *
+ * Regex being used is (\\d+?)\\1 where
+ * \\d        - means a numerical digit
+ * \\d+       - means 1 or more occurrences of a digit
+ * \\d+?      - means reluctant (non-greedy) match of 1 OR more digits
+ * ( and )    - to group the above regex into group # 1
+ * \\1        - means back reference to group # 1
+ * (\\d+?)\\1 - repeat the group # 1 immediately after group # 1
+ *
+ *
+ *
+ */
 
 public class LongDivisionCalculator {
     public static void main(String[] args) throws IOException {
-        int a = 0; //input variable
-        int b = 0; //input variable
-        int c = 0; //result variable
+        int numerator = 0; //input variable
+        int denominator = 0; //input variable
+        int result = 0; //result variable
         boolean point = false;
-        List<String> resultsStr = new ArrayList<String>(); //aggregated results
+        String resultString = "";
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         printNewLine("Welcome to long devision calculator");
-        a = input(a, bufferedReader, "Please enter numerator (a): ");
-        b = input(b, bufferedReader, "Please enter de-numerator (b): ");
+        numerator = input(numerator, bufferedReader,
+                "Please enter numerator   : ");
+        denominator = input(denominator, bufferedReader,
+                "Please enter de-numerator: ");
+        printNewLine(numerator + " | " + denominator);
 
-
-        printNewLine(a+" | "+b);
-
-        int i = 0;
         do {
             //if numerator less then de-numerator
-            int i1 = 0;
-            while (a<b) {
-                if (i1 > 0) {resultsStr.add(String.valueOf(0));}
-                if (!point){resultsStr.add("."); point = true;}
-                a *= 10;
-                i1++;
+            int i = 0;
+            while (numerator < denominator) {
+                if (i > 0) {
+                    resultString += "0";
+                }
+                if (!point) {
+                    resultString += ".";
+                    point = true;
+                }
+                numerator *= 10;
+                i++;
             }
-            System.out.println(a);
 
-            while (a >= b) {
-                //int iSpace;
-                a -= b;
-                c++;
+            System.out.println(numerator);
+
+            while (numerator >= denominator) {
+                numerator -= denominator;
+                result++;
             }
-            resultsStr.add(String.valueOf(c));
-            c = 0;
+            resultString += (String.valueOf(result));
+            result = 0;
 
-            i++;
-        } while (a!=0 && i < 10);
+            //verify devision period
+            String regex = "(\\d+?)\\1";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(resultString);
+            if (matcher.find()) {
+                System.out.println(resultString + "(" + matcher.group(1)+ ")");
+                break;
+            } else {
+                //System.out.println(resultString + " has no repeation");
+            }
+        } while (true);
 
-        //Print results
-        for (String r : resultsStr) {
-            System.out.print(r);
-        }
+
         printNewLine("\nHave a nice day! :)");
     }
 
@@ -63,10 +89,10 @@ public class LongDivisionCalculator {
         System.out.print(inputText);
         boolean isError = true;
         while (isError) {
-            try{
+            try {
                 i = Integer.parseInt(br.readLine());
                 isError = false;
-            }catch(NumberFormatException nfe){
+            } catch (NumberFormatException nfe) {
                 System.err.println("Inappropriate number format. Please use integer");
                 isError = true;
             }
