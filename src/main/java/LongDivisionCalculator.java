@@ -27,10 +27,9 @@ import java.util.regex.Pattern;
 
 public class LongDivisionCalculator {
     public static void main(String[] args) throws IOException {
-        int numerator = 0; //input variable
-        int denominator = 0; //input variable
-        int result = 0; //result variable
-        int result1 = 0; //result variable
+        int numerator = 0;
+        int denominator = 0;
+        int result = 0;
         boolean point = false;
         String resultString = "";
 
@@ -98,21 +97,4 @@ public class LongDivisionCalculator {
         }
         return i;
     }
-
-
 }
-
-
-
-/* try to implement devision without devision
-
-do {
-        int numLength = (int)(Math.log10(a)+1);
-        System.out.println("a numLength: " +numLength);
-
-        for(numLength = (int)(Math.log10(a)+1); numLength>0; numLength--){
-        a = a/10;
-        System.out.println("a do cancat: " +a);
-
-        }
-        } while (a1>=0);*/
