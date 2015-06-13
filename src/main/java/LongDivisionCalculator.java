@@ -30,15 +30,14 @@ public class LongDivisionCalculator {
         int numerator = 0; //input variable
         int denominator = 0; //input variable
         int result = 0; //result variable
+        int result1 = 0; //result variable
         boolean point = false;
         String resultString = "";
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         printNewLine("Welcome to long devision calculator");
-        numerator = input(numerator, bufferedReader,
-                "Please enter numerator   : ");
-        denominator = input(denominator, bufferedReader,
-                "Please enter de-numerator: ");
+        numerator = input(numerator, bufferedReader, "Please enter numerator   : ");
+        denominator = input(denominator, bufferedReader, "Please enter de-numerator: ");
         printNewLine(numerator + " | " + denominator);
 
         do {
@@ -70,12 +69,12 @@ public class LongDivisionCalculator {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(resultString);
             if (matcher.find()) {
-                System.out.println(resultString + "(" + matcher.group(1)+ ")");
+                System.out.println(resultString.substring(0, matcher.group(1).length() + 2) + "(" + matcher.group(1)+ ")");
                 break;
             } else {
-                //System.out.println(resultString + " has no repeation");
+                System.out.println(resultString);
             }
-        } while (true);
+        } while (numerator!=0);
 
 
         printNewLine("\nHave a nice day! :)");
