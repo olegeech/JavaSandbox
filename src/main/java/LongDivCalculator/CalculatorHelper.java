@@ -25,4 +25,8 @@ public class CalculatorHelper {
         }
         return userInput;
     }
+
+    public void printNewLine(String text) {
+        System.out.println(text);
+    }
 }

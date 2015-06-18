@@ -30,11 +30,11 @@ public class CalculatorRunner {
         boolean point = false;
         String resultString = "";
 
-        printNewLine("Welcome to long devision calculator");
+        helper.printNewLine("Welcome to long devision calculator");
         numerator   = helper.getUserInput("Please enter numerator   : ");
         denominator = helper.getUserInput("Please enter de-numerator: ");
 
-        printNewLine(numerator + " | " + denominator);
+        helper.printNewLine(numerator + " | " + denominator);
 
         do {
             //if numerator less then de-numerator
@@ -51,7 +51,7 @@ public class CalculatorRunner {
                 i++;
             }
 
-            System.out.println(numerator);
+            helper.printNewLine(String.valueOf(numerator));
 
             while (numerator >= denominator) {
                 numerator -= denominator;
@@ -65,18 +65,14 @@ public class CalculatorRunner {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(resultString);
             if (matcher.find()) {
-                System.out.println(resultString.substring(0, matcher.group(1).length() + 2) + "(" + matcher.group(1)+ ")");
+                helper.printNewLine(resultString.substring(0, matcher.group(1).length() + 2) + "(" + matcher.group(1) + ")");
                 break;
             } else if (numerator == 0) {
-                System.out.println(resultString);
+                helper.printNewLine(resultString);
             }
         } while (numerator!=0);
 
 
-        printNewLine("\nHave a nice day! :)");
-    }
-
-    private static void printNewLine(String text) {
-        System.out.println(text);
+        helper.printNewLine("\nHave a nice day! :)");
     }
 }
