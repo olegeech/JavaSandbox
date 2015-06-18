@@ -1,12 +1,8 @@
-/**
+package LongDivCalculator; /**
  * Created by Oleg on 21.08.2014.
  */
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,18 +21,19 @@ import java.util.regex.Pattern;
  *
  */
 
-public class LongDivisionCalculator {
+public class CalculatorRunner {
     public static void main(String[] args) throws IOException {
-        int numerator = 0;
-        int denominator = 0;
+        CalculatorHelper helper = new CalculatorHelper();
+        int numerator;
+        int denominator;
         int result = 0;
         boolean point = false;
         String resultString = "";
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         printNewLine("Welcome to long devision calculator");
-        numerator = input(numerator, bufferedReader, "Please enter numerator   : ");
-        denominator = input(denominator, bufferedReader, "Please enter de-numerator: ");
+        numerator   = helper.getUserInput("Please enter numerator   : ");
+        denominator = helper.getUserInput("Please enter de-numerator: ");
+
         printNewLine(numerator + " | " + denominator);
 
         do {
@@ -70,7 +67,7 @@ public class LongDivisionCalculator {
             if (matcher.find()) {
                 System.out.println(resultString.substring(0, matcher.group(1).length() + 2) + "(" + matcher.group(1)+ ")");
                 break;
-            } else {
+            } else if (numerator == 0) {
                 System.out.println(resultString);
             }
         } while (numerator!=0);
@@ -81,20 +78,5 @@ public class LongDivisionCalculator {
 
     private static void printNewLine(String text) {
         System.out.println(text);
-    }
-
-    private static int input(int i, BufferedReader br, String inputText) throws IOException {
-        System.out.print(inputText);
-        boolean isError = true;
-        while (isError) {
-            try {
-                i = Integer.parseInt(br.readLine());
-                isError = false;
-            } catch (NumberFormatException nfe) {
-                System.err.println("Inappropriate number format. Please use integer");
-                isError = true;
-            }
-        }
-        return i;
     }
 }
