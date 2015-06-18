@@ -65,7 +65,9 @@ public class CalculatorRunner {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(resultString);
             if (matcher.find()) {
-                helper.printNewLine(resultString.substring(0, matcher.group(1).length() + 2) + "(" + matcher.group(1) + ")");
+                String divPeriod = matcher.group(1);
+                resultString = resultString.substring(0, divPeriod.length() + 2); //substring resultString by div period
+                helper.printNewLine(resultString + "(" + divPeriod + ")");
                 break;
             } else if (numerator == 0) {
                 helper.printNewLine(resultString);
