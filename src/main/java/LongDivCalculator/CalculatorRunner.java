@@ -28,7 +28,8 @@ public class CalculatorRunner {
         int denominator;
         int result = 0;
         boolean point = false;
-        String resultString = "";
+        //String resultString = "";
+        StringBuilder resultString = new StringBuilder();
 
         helper.printNewLine("Welcome to long devision calculator");
         numerator   = helper.getUserInput("Please enter numerator   : ");
@@ -41,10 +42,10 @@ public class CalculatorRunner {
             int i = 0;
             while (numerator < denominator) {
                 if (i > 0) {
-                    resultString += "0";
+                    resultString.append("0");
                 }
                 if (!point) {
-                    resultString += ".";
+                    resultString.append(".");
                     point = true;
                 }
                 numerator *= 10;
@@ -57,7 +58,7 @@ public class CalculatorRunner {
                 numerator -= denominator;
                 result++;
             }
-            resultString += (String.valueOf(result));
+            resultString.append(String.valueOf(result));
             result = 0;
 
             //verify devision period
@@ -66,11 +67,11 @@ public class CalculatorRunner {
             Matcher matcher = pattern.matcher(resultString);
             if (matcher.find()) {
                 String divPeriod = matcher.group(1);
-                resultString = resultString.substring(0, divPeriod.length() + 2); //substring resultString by div period
+                resultString.replace(0, resultString.length(), resultString.substring(0, divPeriod.length() + 2)); //substring resultString by div period
                 helper.printNewLine(resultString + "(" + divPeriod + ")");
                 break;
             } else if (numerator == 0) {
-                helper.printNewLine(resultString);
+                helper.printNewLine(resultString.toString());
             }
         } while (numerator!=0);
 
