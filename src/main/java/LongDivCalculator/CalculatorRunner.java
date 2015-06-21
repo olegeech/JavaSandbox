@@ -3,6 +3,8 @@ package LongDivCalculator; /**
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +32,7 @@ public class CalculatorRunner {
         boolean point = false;
         //String resultString = "";
         StringBuilder resultString = new StringBuilder();
+        List <Interm> interms = new ArrayList<Interm>();
 
         helper.printNewLine("Welcome to long devision calculator");
         numerator   = helper.getUserInput("Please enter numerator   : ");
@@ -39,6 +42,8 @@ public class CalculatorRunner {
 
         do {
             //if numerator less then de-numerator
+        	int numeratorInterm = numerator;
+        	
             int i = 0;
             while (numerator < denominator) {
                 if (i > 0) {
@@ -58,6 +63,21 @@ public class CalculatorRunner {
                 numerator -= denominator;
                 result++;
             }
+            int resultInterm = result;
+            int restInterm = numerator;
+            
+          //verify devision period new impl
+            for (int j = interms.size() - 1; j >= 0; j--){
+            	Interm p = interms.get(j);
+            	if (p.numerator == numeratorInterm && p.result == resultInterm && p.rest == restInterm) {
+            		helper.printNewLine("Perod exist from: " + j + " to " + (interms.size()-1));
+            		return;
+            	}	
+            }
+            
+            interms.add(new Interm(numeratorInterm, resultInterm, restInterm));
+            
+            
             resultString.append(String.valueOf(result));
             result = 0;
 
@@ -78,4 +98,16 @@ public class CalculatorRunner {
 
         helper.printNewLine("\nHave a nice day! :)");
     }
+}
+
+class Interm {
+	int numerator;
+	int result;
+	int rest;
+	
+	Interm (int num, int res, int rst) {
+		numerator = num;
+		result = res;
+		rest = rst;
+	}
 }
