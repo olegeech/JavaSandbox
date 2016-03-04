@@ -19,8 +19,6 @@ import java.util.regex.Pattern;
  * \\1        - means back reference to group # 1
  * (\\d+?)\\1 - repeat the group # 1 immediately after group # 1
  *
- *
- *
  */
 
 public class CalculatorRunner {
